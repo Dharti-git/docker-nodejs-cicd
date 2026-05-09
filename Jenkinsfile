@@ -12,15 +12,15 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t myapp .'
+                sh 'docker build -t myapp .'
             }
         }
 
         stage('Run Docker Container') {
             steps {
-                bat 'docker stop myapp-container || exit 0'
-                bat 'docker rm myapp-container || exit 0'
-                bat 'docker run -d -p 3000:3000 --name myapp-container myapp'
+                sh 'docker stop myapp-container || true'
+                sh 'docker rm myapp-container || true'
+                sh 'docker run -d -p 3000:3000 --name myapp-container myapp'
             }
         }
     }
